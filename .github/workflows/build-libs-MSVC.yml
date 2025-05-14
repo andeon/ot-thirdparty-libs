@@ -19,7 +19,7 @@ jobs:
 
     - name: Build Release Static Lib (/MD) without generating .pdb
       shell: cmd
-      working-directory: zlib-1.3.1\contrib\prj
+      working-directory: thirdparty\zlib-1.3.1\contrib\prj
       run: |
         msbuild zlib.sln /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142 /p:RuntimeLibrary=MultiThreadedDLL /p:GenerateDebugInformation=false /p:DebugSymbols=false /p:LinkIncremental=false
         if not exist x64\Release\zlib.lib (
@@ -30,7 +30,7 @@ jobs:
 
     - name: Build Debug Static Lib (/MDd) without generating .pdb
       shell: cmd
-      working-directory:  zlib-1.3.1\contrib\prj
+      working-directory:  thirdparty\zlib-1.3.1\contrib\prj
       run: |
         msbuild zlib.sln /p:Configuration=Debug /p:Platform=x64 /p:PlatformToolset=v142 /p:RuntimeLibrary=MultiThreadedDebugDLL /p:GenerateDebugInformation=false /p:DebugSymbols=false /p:LinkIncremental=false
         if not exist x64\Debug\zlib.lib (

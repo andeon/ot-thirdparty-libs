@@ -44,6 +44,6 @@ jobs:
       with:
         name: zlib-static-libs-md
         path: |
-          zlib-1.3.1_2019_64.lib
-          zlib-1.3.1_2019_64d.lib
+          ./zlib-1.3.1_2019_64.lib
+          ./zlib-1.3.1_2019_64d.lib
         retention-days: 5

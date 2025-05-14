@@ -16,12 +16,12 @@ jobs:
 
     - name: Setup MSVC
       uses: ilammy/msvc-dev-cmd@v1
-      
+
     - name: Build Release Static Lib (/MD)
       shell: cmd
       working-directory: thirdparty\tiff-4.7.0\prj
       run: |
-        msbuild LibTIFF.sln /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142 /p:RuntimeLibrary=MultiThreadedDLL /p:GenerateDebugInformation=false /p:DebugSymbols=false /p:LinkIncremental=false
+        msbuild LibTIFF.sln -m /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142 /p:RuntimeLibrary=MultiThreadedDLL /p:GenerateDebugInformation=false /p:DebugSymbols=false /p:LinkIncremental=false
         if not exist x64\Release\LibTIFF.lib (
           echo ERROR: LibTIFF.lib not found!
           exit 1

@@ -44,6 +44,6 @@ jobs:
       with:
         name: zlib-static-libs-md
         path: |
-          ${{ github.workspace }}/zlib-1.3.1_2019_64.lib
-          ${{ github.workspace }}/zlib-1.3.1_2019_64d.lib
+          thirdparty\zlib-1.3.1\zlib-1.3.1_2019_64.lib
+          thirdparty\zlib-1.3.1\zlib-1.3.1_2019_64d.lib
         retention-days: 5

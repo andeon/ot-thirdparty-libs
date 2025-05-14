@@ -16,6 +16,17 @@ jobs:
 
     - name: Setup MSVC
       uses: ilammy/msvc-dev-cmd@v1
+      
+    - name: Build Release Static Lib (/MD)
+      shell: cmd
+      working-directory: thirdparty\tiff-4.7.0\prj
+      run: |
+        msbuild LibTIFF.sln /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142 /p:RuntimeLibrary=MultiThreadedDLL /p:GenerateDebugInformation=false /p:DebugSymbols=false /p:LinkIncremental=false
+        if not exist x64\Release\LibTIFF.lib (
+          echo ERROR: LibTIFF.lib not found!
+          exit 1
+        )
+        copy x64\Release\LibTIFF.lib ..\..\libtiff_2019_64.lib      
 
     - name: Build Release Static Lib (/MD) without generating .pdb
       shell: cmd
@@ -38,17 +49,6 @@ jobs:
           exit 1
         )
         copy x64\Debug\zlib.lib ..\..\zlib-1.3.1_2019_64d.lib
-
-    - name: Build Release Static Lib (/MD)
-      shell: cmd
-      working-directory: thirdparty\tiff-4.7.0\prj
-      run: |
-        msbuild LibTIFF.sln /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142 /p:RuntimeLibrary=MultiThreadedDLL /p:GenerateDebugInformation=false /p:DebugSymbols=false /p:LinkIncremental=false
-        if not exist x64\Release\LibTIFF.lib (
-          echo ERROR: LibTIFF.lib not found!
-          exit 1
-        )
-        copy x64\Release\LibTIFF.lib ..\..\libtiff_2019_64.lib
 
     - name: Upload static libs
       uses: actions/upload-artifact@v4

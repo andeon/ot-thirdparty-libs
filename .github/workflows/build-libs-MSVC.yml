@@ -21,7 +21,7 @@ jobs:
       shell: cmd
       working-directory: thirdparty\zlib-1.3.1\contrib\prj
       run: |
-        msbuild zlib.sln /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142 /p:RuntimeLibrary=MultiThreadedDLL /p:GenerateDebugInformation=false /p:DebugSymbols=false /p:LinkIncremental=false
+        msbuild zlib.sln -m /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142 /p:RuntimeLibrary=MultiThreadedDLL /p:GenerateDebugInformation=false /p:DebugSymbols=false /p:LinkIncremental=false
         if not exist x64\Release\zlib.lib (
           echo ERROR: zlib.lib not found!
           exit 1
@@ -32,7 +32,7 @@ jobs:
       shell: cmd
       working-directory:  thirdparty\zlib-1.3.1\contrib\prj
       run: |
-        msbuild zlib.sln /p:Configuration=Debug /p:Platform=x64 /p:PlatformToolset=v142 /p:RuntimeLibrary=MultiThreadedDebugDLL /p:GenerateDebugInformation=false /p:DebugSymbols=false /p:LinkIncremental=false
+        msbuild zlib.sln -m /p:Configuration=Debug /p:Platform=x64 /p:PlatformToolset=v142 /p:RuntimeLibrary=MultiThreadedDebugDLL /p:GenerateDebugInformation=false /p:DebugSymbols=false /p:LinkIncremental=false
         if not exist x64\Debug\zlib.lib (
           echo ERROR: zlib.lib not found!
           exit 1
@@ -44,6 +44,6 @@ jobs:
       with:
         name: zlib-static-libs-md
         path: |
-          ./zlib-1.3.1_2019_64.lib
-          ./zlib-1.3.1_2019_64d.lib
+          ${{ github.workspace }}/zlib-1.3.1_2019_64.lib
+          ${{ github.workspace }}/zlib-1.3.1_2019_64d.lib
         retention-days: 5

@@ -28,7 +28,7 @@ jobs:
       - name: Configure Conan profile
         run: |
           conan profile detect
-          conan profile show default
+          conan profile show -pr default
         shell: pwsh
 
       # Instalar dependências com Conan

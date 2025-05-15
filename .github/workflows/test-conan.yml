@@ -28,8 +28,8 @@ jobs:
       - name: Configure Conan profile
         run: |
           conan profile detect
-          conan profile set settings.compiler.version=193 default
-          conan profile set settings.compiler.runtime=dynamic default
+          conan profile show default
+        shell: pwsh
 
       # Instalar dependências com Conan
       - name: Install dependencies

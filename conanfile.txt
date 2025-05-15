@@ -1,4 +1,4 @@
 [requires]
 glew/2.2.0
-[generators]
-cmake
+[options]
+glew:shared=True

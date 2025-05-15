@@ -1,4 +1,4 @@
-name: Build with Conan and CMake
+name: Build Windows Libraries
 
 on:
   workflow_dispatch:
@@ -6,35 +6,46 @@ on:
 jobs:
   build:
     runs-on: windows-2019
-
+    
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Install Conan
-        run: |
+    - name: Checkout repository
+      uses: actions/checkout@v4
+           
+    - name: Install Conan
+      run: |
           python -m pip install --upgrade pip
           pip install conan
-      - name: Create default Conan profile
-        run: conan profile detect --force
       
-      - name: Install dependencies with Conan
-        run: |
-          conan install . --build=missing `
-            --settings os=Windows `
-            --settings compiler=msvc `
-            --settings compiler.version=192 `
-            --settings compiler.runtime=dynamic `
-            --settings build_type=Release `
-            --settings arch=x86_64 `
-            --generator CMakeDeps `
-            --generator CMakeToolchain
-      - name: Configure project with CMake
-        run: |
-          cmake . -G "Visual Studio 16 2019" -A x64 -DCMAKE_TOOLCHAIN_FILE=generators/conan_toolchain.cmake
-          cmake --build . --config Release
-      - name: Upload static libs
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-artifacts
-          path: build/
+    - name: Configure Conan for Windows
+      run: |
+        conan profile new default --detect --force
+        conan profile update settings.compiler="msvc" default
+        conan profile update settings.compiler.version=16 default
+        conan profile update settings.compiler.runtime=MD default
+        conan profile update settings.arch=x86_64 default
+        conan profile update settings.build_type=Release default
+        
+    - name: Build libraries
+      run: |
+        # Atualizar ferramentas do Conan
+        conan config install https://github.com/conan-io/conanclientcert.git
+        conan remote add conancenter https://center.conan.io
+        
+        # Instalar e compilar bibliotecas
+        conan install zlib/1.2.12@ --build=missing -s build_type=Release
+        conan install boost/1.81.0@ --build=missing -s build_type=Release
+        
+        # Outras bibliotecas podem ser adicionadas aqui
+        # conan install openssl/1.1.1t@ --build=missing
+        
+    - name: Package artifacts
+      run: |
+        mkdir artifacts
+        robocopy "%USERPROFILE%\.conan\data" artifacts /E /NFL /NDL /NJH /NJS /nc /ns /np
+        
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: windows-libraries
+        path: artifacts
+        retention-days: 5

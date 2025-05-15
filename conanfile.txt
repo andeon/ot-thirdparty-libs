@@ -1,8 +1,7 @@
 [requires]
 glew/2.2.0
-
-[options]
-glew:shared=True
-
 [generators]
-cmake
+CMakeDeps
+CMakeToolchain
+[layout]
+cmake_layout

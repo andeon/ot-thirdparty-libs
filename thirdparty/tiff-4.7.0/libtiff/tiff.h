@@ -26,7 +26,7 @@
 #define _TIFF_
 
 #include "tiffconf.h"
-#include <cstdint>
+#include <stdint.h>
 
 /*
  * Tag Image File Format (TIFF)

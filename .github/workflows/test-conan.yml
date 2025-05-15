@@ -9,7 +9,7 @@ jobs:
     
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
            
     - name: Install Conan
       run: |
@@ -44,7 +44,7 @@ jobs:
         robocopy "%USERPROFILE%\.conan\data" artifacts /E /NFL /NDL /NJH /NJS /nc /ns /np
         
     - name: Upload artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: windows-libraries
         path: artifacts

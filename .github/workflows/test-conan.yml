@@ -1,4 +1,4 @@
-name: Build and Upload GLEW + FreeGLUT + LibTIFF
+name: Build and Upload Thirdparty Libs
 
 on:
   workflow_dispatch:
@@ -35,7 +35,8 @@ jobs:
         run: |
           conan install . --build=missing -s build_type=Release `
             -o glew/*:shared=True `
-            -o freeglut/*:shared=True
+            -o freeglut/*:shared=True `
+            -o zlib/*:shared=True `
             -o libtiff/*:shared=True
         shell: pwsh
 

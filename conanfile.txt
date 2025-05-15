@@ -11,4 +11,4 @@ CMakeToolchain
 glew/*:shared=True
 freeglut/*:shared=True
 zlib/*:shared=False
-libtiff/*:shared=True
+libtiff/*:shared=False

@@ -37,7 +37,7 @@ jobs:
             -o glew/*:shared=True `
             -o freeglut/*:shared=True `
             -o zlib/*:shared=False `
-            -o libtiff/*:shared=True
+            -o libtiff/*:shared=False
         shell: pwsh
 
       - name: Upload artifacts

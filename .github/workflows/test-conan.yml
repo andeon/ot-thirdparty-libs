@@ -20,18 +20,18 @@ jobs:
 
       # Configurar o Visual Studio 2019 (v142)
       - name: Setup Visual Studio 2019 (v142)
-        uses: microsoft/setup-msbuild@v1.0.2
+        uses: microsoft/setup-msbuild@v1.1.0
         with:
           vs-version: 16.0 # VS 2019
 
       # Rodar o comando Conan para instalar dependências e compilar GLEW
       - name: Install dependencies with Conan
         run: |
-          conan install . --build=missing ^
-            -s compiler="Visual Studio" ^
-            -s compiler.version=16 ^
-            -s compiler.runtime=MD ^
-            -s build_type=Release ^
+          conan install . --build=missing `
+            -s compiler="Visual Studio" `
+            -s compiler.version=16 `
+            -s compiler.runtime=MD `
+            -s build_type=Release `
             -s arch=x86_64
 
       # Gerar as bibliotecas com MSBuild

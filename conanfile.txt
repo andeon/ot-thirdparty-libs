@@ -6,4 +6,4 @@ CMakeDeps
 CMakeToolchain
 
 [options]
-glew:shared=True
+glew/*:shared=True

@@ -1,49 +1,40 @@
-name: Build with Conan and MSVC
+name: Build with Conan and CMake
 
 on:
-  workflow_dispatch:  # Permite disparar o workflow manualmente
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: windows-2019
 
     steps:
-      # 1. Checkout do repositório
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      # 2. Instalar o Conan
       - name: Install Conan
         run: |
           python -m pip install --upgrade pip
           pip install conan
-
       - name: Create default Conan profile
         run: conan profile detect --force
-
-      # 3. Instalar dependências com Conan
+      
       - name: Install dependencies with Conan
         run: |
-          conan install . --build=missing --settings os=Windows --settings compiler=msvc --settings compiler.version=16 --settings compiler.runtime=MD --settings build_type=Release --settings arch=x86_64
-
-      # 4. Gerar arquivos de configuração CMake com Conan (inclui MSVC)
-      - name: Generate CMake files with Conan
-        run: |
-          conan install . --build=missing --settings os=Windows --settings compiler=msvc --settings compiler.version=16 --settings compiler.runtime=MD --settings build_type=Release --settings arch=x86_64 --generator=cmake
-
-      # 5. Rodar CMake para configurar o projeto com o Visual Studio
+          conan install . --build=missing `
+            --settings os=Windows `
+            --settings compiler=msvc `
+            --settings compiler.version=192 `
+            --settings compiler.runtime=dynamic `
+            --settings build_type=Release `
+            --settings arch=x86_64 `
+            --generator CMakeDeps `
+            --generator CMakeToolchain
       - name: Configure project with CMake
         run: |
           cmake . -G "Visual Studio 16 2019" -A x64 -DCMAKE_TOOLCHAIN_FILE=generators/conan_toolchain.cmake
-
-      # 6. Construir o projeto com CMake (usando Visual Studio/MSVC)
-      - name: Build project with CMake
-        run: |
           cmake --build . --config Release
-
-      # 7. (Opcional) Upload dos artefatos gerados (binários)
       - name: Upload static libs
         uses: actions/upload-artifact@v4
         with:
           name: build-artifacts
-          path: deploy/
+          path: build/

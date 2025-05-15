@@ -4,3 +4,6 @@ glew/2.2.0
 [generators]
 CMakeDeps
 CMakeToolchain
+
+[options]
+glew:shared=True

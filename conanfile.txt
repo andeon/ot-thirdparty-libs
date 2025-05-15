@@ -1,9 +1,10 @@
 [requires]
 glew/2.2.0
-
+freeglut/3.4.0
 [generators]
 CMakeDeps
 CMakeToolchain
 
 [options]
 glew/*:shared=True
+freeglut/*:shared=True

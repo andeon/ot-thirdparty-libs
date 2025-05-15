@@ -33,13 +33,15 @@ jobs:
 
       - name: Install dependencies
         run: |
-          conan install . --build=missing -s build_type=Release -o glew/*:shared=True
+          conan install . --build=missing -s build_type=Release `
+            -o glew/*:shared=True `
+            -o freeglut/*:shared=True
         shell: pwsh
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: glew-libs
+          name: thirdparty-libs
           path: |
             ~\.conan2\p\**\lib\*.lib
             ~\.conan2\p\**\bin\*.dll

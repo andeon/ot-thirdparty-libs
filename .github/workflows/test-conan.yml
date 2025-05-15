@@ -34,6 +34,8 @@ jobs:
       - name: Install dependencies
         run: |
           conan install . --build=missing -s build_type=Release `
+            -s compiler.runtime=dynamic `
+            -s compiler.runtime_type=Release `
             -o glew/*:shared=True `
             -o freeglut/*:shared=True `
             -o zlib/*:shared=False `

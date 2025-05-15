@@ -23,9 +23,9 @@ jobs:
         run: |
           conan install . --build=missing `
             --settings os=Windows `
-            --settings compiler="Visual Studio" `
-            --settings compiler.version=16 `
-            --settings compiler.runtime=MD `
+            --settings compiler=msvc `
+            --settings compiler.version=192 `
+            --settings compiler.runtime=dynamic `
             --settings build_type=Release `
             --settings arch=x86_64 `
             --generator CMakeDeps `

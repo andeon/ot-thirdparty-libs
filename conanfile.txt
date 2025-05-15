@@ -1,4 +1,6 @@
 [requires]
 glew/2.2.0
-[options]
-glew:shared=True
+
+[generators]
+CMakeDeps
+CMakeToolchain

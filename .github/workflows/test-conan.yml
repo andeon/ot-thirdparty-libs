@@ -36,11 +36,6 @@ jobs:
           conan install . --build=missing -s build_type=Release -o glew/*:shared=True
         shell: pwsh
 
-      - name: List Conan cache
-        run: |
-          dir "$env:USERPROFILE\.conan2\p" /s
-        shell: pwsh
-
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:

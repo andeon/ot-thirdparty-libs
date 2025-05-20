@@ -36,9 +36,12 @@ jobs:
           conan install . --build=missing -s build_type=Release `
             -s compiler.runtime=dynamic `
             -s compiler.runtime_type=Release `
+            -o lz4/*:shared=True `
             -o lzo/*:shared=True `
             -o glew/*:shared=True `
             -o freeglut/*:shared=True `
+            -o libjpeg-turbo/*:shared=True `
+            -o libpng/*:shared=True `
             -o zlib/*:shared=False `
             -o libtiff/*:shared=False
         shell: pwsh

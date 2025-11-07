@@ -33,7 +33,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          conan install . --build=missing -s build_type=Release `
+          conan install . --build=missing 
+            -s build_type=Release `
             -s compiler.runtime=dynamic `
             -s compiler.runtime_type=Release `
             -o lz4/*:shared=True `
@@ -44,7 +45,7 @@ jobs:
             -o libpng/*:shared=True `
             -o zlib/*:shared=False `
             -o libtiff/*:shared=False `
-            --conf "core.package_providers:libjpeg=libjpeg-turbo"
+            --conf core.package_providers:libjpeg=libjpeg-turbo
         shell: pwsh
 
       - name: Upload artifacts
@@ -55,3 +56,4 @@ jobs:
             ~\.conan2\p\**\lib\*.lib
 
             ~\.conan2\p\**\bin\*.dll
+

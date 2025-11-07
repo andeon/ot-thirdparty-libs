@@ -43,7 +43,8 @@ jobs:
             -o libjpeg-turbo/*:shared=True `
             -o libpng/*:shared=True `
             -o zlib/*:shared=False `
-            -o libtiff/*:shared=False
+            -o libtiff/*:shared=False `
+            --conf "core.package_providers:libjpeg=libjpeg-turbo"
         shell: pwsh
 
       - name: Upload artifacts
@@ -52,4 +53,5 @@ jobs:
           name: ot-thirdparty-libs
           path: |
             ~\.conan2\p\**\lib\*.lib
+
             ~\.conan2\p\**\bin\*.dll

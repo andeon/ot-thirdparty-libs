@@ -33,8 +33,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          conan install . --build=missing 
-            -s build_type=Release `
+          conan install . --build=missing -s build_type=Release `
             -s compiler.runtime=dynamic `
             -s compiler.runtime_type=Release `
             -o lz4/*:shared=True `
@@ -56,4 +55,5 @@ jobs:
             ~\.conan2\p\**\lib\*.lib
 
             ~\.conan2\p\**\bin\*.dll
+
 
